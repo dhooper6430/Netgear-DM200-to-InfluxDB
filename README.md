@@ -1,5 +1,5 @@
 
-# Arris CM8200 to InfluxDB
+# Netgear DM200 to InfluxDB
 
 This is a python script to webscrape the Netgear DM200 ADSL modem web interface and place data into InfluxDB for graphing in Grafana. Its intended use is on the NBN VDSL2 Network, specifically the DM-200. It will however work with other Netgear modems that use the same UI and others with some modification.
 
