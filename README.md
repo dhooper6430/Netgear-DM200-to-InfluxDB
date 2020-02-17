@@ -1,12 +1,12 @@
 
 # Arris CM8200 to InfluxDB
 
-This is a python script to webscrape the Arris CM8200 web interface and place data into InfluxDB for graphing in Grafana. Its intended use is on the NBN MTM HFC network, specifically the CM8200B. It will however work with other Arris modems that use the same UI and others with some modification.
+This is a python script to webscrape the Netgear DM200 ADSL modem web interface and place data into InfluxDB for graphing in Grafana. Its intended use is on the NBN VDSL2 Network, specifically the DM-200. It will however work with other Netgear modems that use the same UI and others with some modification.
 
 This assumes that Grafana and InfluxDB are already installed and working and that you have a basic understanding of both.
-This also assumes that the Arris modem is accessible from within the end users LAN (with or without NAT rules etc).
+This also assumes that the Netgear modem is accessible from within the end users LAN (with or without NAT rules etc).
 
-Just a note, if there is a flap or dropout the Arris NTD will do a soft reboot thus blocking access to the WebUI requiring a factory reset using the reset pin for ~5 seconds. Unfortunately this is just how it is from the NBN overlords.
+# Just a note, if there is a flap or dropout the Arris NTD will do a soft reboot thus blocking access to the WebUI requiring a factory reset using the reset pin for ~5 seconds. Unfortunately this is just how it is from the NBN overlords.
 
 [Click here](https://github.com/risb0r/Arris-CM8200-to-InfluxDB/blob/master/README.ROUTER.SETUP.GUIDES.md) for some end user setup guides for various consumer routers. Feel free to fork and contribute as desired.
 
@@ -33,7 +33,7 @@ pip3 install -r requirements.txt
 Setup influx with a database
 ```bash
 $ influx
-> CREATE DATABASE cm8200b_stats
+> CREATE DATABASE vdsl_modem_stats
 ```
 Ensure that the database was created
 ```bash
@@ -41,7 +41,7 @@ Ensure that the database was created
 name: databases
 name
 ----
-cm8200b_stats <------
+vdsl_modem_stats <------
 ```
 
 Adjust cm8200_stats.py - Host, Port, Database, Username and Password as neccesary.
@@ -50,12 +50,12 @@ Adjust cm8200_stats.py - Host, Port, Database, Username and Password as neccesar
 # Second argument = default value if environment variable is not set.
 influxip = os.environ.get("INFLUXDB_HOST", "127.0.0.1")
 influxport = int(os.environ.get("INFLUXDB_HOST_PORT", "8086"))
-influxdb = os.environ.get("INFLUXDB_DATABASE", "cm8200b_stats")
+influxdb = os.environ.get("INFLUXDB_DATABASE", "vdsl_modem_stats")
 influxid = os.environ.get("INFLUXDB_USERNAME", "admin")
 influxpass = os.environ.get("INFLUXDB_PASSWORD", "")
 
 # cm8200b URL - Leave this unless your NTD URL is http://192.168.100.1
-ntd_url = os.environ.get("NTD_URL", "http://192.168.0.1")
+ntd_url = os.environ.get("NTD_URL", "http://192.168.104.1")
 ```
 
 ## Usage
